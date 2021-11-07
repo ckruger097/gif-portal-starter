@@ -6,6 +6,16 @@ import {useEffect, useState} from "react";
 const TWITTER_HANDLE = '0xcmrnk';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
+// Test GIFs!
+const TEST_GIFS = [
+    "https://c.tenor.com/0GeY2LNQNoYAAAAC/jerma-jerma985.gif",
+    "https://c.tenor.com/sZY-AkBVEoMAAAAC/jerma-speen.gif",
+    "https://c.tenor.com/Y4sE1nGvRtEAAAAd/jerma.gif",
+    "https://c.tenor.com/fQG-_22KG4EAAAAM/jerma985-clown.gif",
+    "https://c.tenor.com/ha7Ob_ptjaYAAAAd/jerma-fast.gif",
+    "https://c.tenor.com/GINKuAQ6JDUAAAAC/jerma-jerma985.gif"
+]
+
 const App = () => {
 
   // State
@@ -53,6 +63,18 @@ const App = () => {
       </button>
   );
 
+  const renderConnectedContainer = () => (
+      <div className="connected-container">
+        <div className="gif-grid">
+          {TEST_GIFS.map(gif => (
+              <div className="gif-item" key={gif}>
+                <img src={gif} alt={gif} />
+              </div>
+          ))}
+        </div>
+      </div>
+  );
+
   // UseEffects
   /* Once component mounts, wait for Phantom wallet connection */
   useEffect(() => {
@@ -65,12 +87,14 @@ const App = () => {
     <div className="App">
       <div className={walletAddress ? 'authed-container' : 'container'}>
         <div className="header-container">
-          <p className="header">🖼 GIF Portal</p>
+          <p className="header">🖼 Meme GIF Station</p>
           <p className="sub-text">
-            View your awesome GIF collection in the metaverse! ✨ 🌐 🌆
+            Check out the decentralized meme space ✨ 🌐 🌆
           </p>
           {/* This only shows if we don't have a wallet address */}
           {!walletAddress && renderNotConnectedContainer()}
+            {/* This shows if we do have a wallet address and are connected */}
+            {walletAddress && renderConnectedContainer()}
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
