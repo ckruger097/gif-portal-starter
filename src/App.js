@@ -173,9 +173,13 @@ const App = () => {
                     <div className="gif-grid">
                         {/* We use index as the key instead, also, the src is now item.gifLink */}
                         {gifList.map((item, index) => (
+
                             <div className="gif-item" key={index}>
-                                <img src={item.gifLink} />
+
+                                <img src={item.gifLink} alt={"COOL GIF!"}/>
+                                <p>Hi! This is owned by ?</p>
                             </div>
+
                         ))}
                     </div>
                 </div>
@@ -211,16 +215,16 @@ const App = () => {
     });
   }, []);
 
-  useEffect(() => {
-      if (walletAddress) {
-          console.log('Grabbing our GIF list . . .');
-
-          // Call Solana program here.
-
-          // Set state
-          setGifList(TEST_GIFS);
-      }
-  }, [walletAddress]);
+  // useEffect(() => {
+  //     if (walletAddress) {
+  //         console.log('Grabbing our GIF list . . .');
+  //
+  //         // Call Solana program here.
+  //
+  //         // Set state
+  //         setGifList(TEST_GIFS);
+  //     }
+  // }, [walletAddress]);
 
   return (
     <div className="App">
