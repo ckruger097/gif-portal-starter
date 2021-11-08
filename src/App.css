@@ -116,11 +116,34 @@
   width: 100%;
   text-align: start;
   bottom: 1px;
+  color: black;
+}
+
+.gif-button {
+  background-color: lightseagreen;
+  border: none;
   color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.gif-button:hover {
+  background-color: #008CBA;
+  color: white;
+  border-radius: 8px;
 }
 
 .gif-slideout {
   color:black;
+  background-color: green;
 }
 
 .connected-container input[type='text'] {

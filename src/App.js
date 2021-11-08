@@ -27,21 +27,6 @@ const opts = {
 // Constants
 const TWITTER_HANDLE = '0xcmrnk';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
-// Test GIFs!
-const TEST_GIFS = [
-    "https://c.tenor.com/0GeY2LNQNoYAAAAC/jerma-jerma985.gif",
-    "https://c.tenor.com/sZY-AkBVEoMAAAAC/jerma-speen.gif",
-    "https://c.tenor.com/Y4sE1nGvRtEAAAAd/jerma.gif",
-    "https://c.tenor.com/fQG-_22KG4EAAAAM/jerma985-clown.gif",
-    "https://c.tenor.com/ha7Ob_ptjaYAAAAd/jerma-fast.gif",
-    "https://c.tenor.com/GINKuAQ6JDUAAAAC/jerma-jerma985.gif",
-    "https://c.tenor.com/0pO-d7FH3QgAAAAi/spongebob-meme-spongebob.gif",
-    "https://c.tenor.com/GTcT7HODLRgAAAAC/smiling-cat-creepy-cat.gif",
-    "https://c.tenor.com/e1pLgmnM9gUAAAAC/memes-meme.gif",
-    "https://c.tenor.com/9356w0cjTxIAAAAd/hamster-hamstermeme.gif",
-    "https://media4.giphy.com/media/79ZBQcnDaldRu/giphy.gif?cid=ecf05e47v5cx8oydtul21wnj74me17ab5c3s49njjvqlxaul&rid=giphy.gif&ct=g"
-]
-
 
 function isValidHttpUrl(string) {
     let url;
@@ -193,19 +178,23 @@ const App = () => {
                         {gifList.map((item, index) => (
                             <div className="gif-item" key={index}>
                                 <img src={item.gifLink} alt={"COOL GIF!"}/>
-                                <button onClick={() => setState({ isPaneOpen: true })}>
-                                    Click me to open right pane!
+                                <button className="gif-button" onClick={() => setState({ isPaneOpen: true })}>
+                                    Info
                                 </button>
+
                                 <SlidingPane
-                                    className="gif-item"
+                                    className="gif-slideout"
                                     isOpen={state.isPaneOpen}
-                                    title="Nice GIF"
+                                    title="GIF info"
+                                    width="500px"
+                                    height="500px"
                                     onRequestClose={() => {
                                         // triggered on "<" on left top click or on outside click
                                         setState({ isPaneOpen: false });
                                     }}
-                                >   <div className="gif-slideout">
-                                <p>HI! {item.userAddress.toString()}</p></div>
+                                >
+                                <p>Submitted by address: {item.userAddress.toString()}</p>
+
                                 </SlidingPane>
                             </div>
 
