@@ -1,10 +1,13 @@
 import twitterLogo from './assets/twitter-logo.svg';
 import './App.css';
-import {useEffect, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 import {Program, web3, Provider} from "@project-serum/anchor";
 import { Connection, PublicKey, clusterApiUrl} from "@solana/web3.js";
 import idl from './idl.json';
 import kp from './keypair.json'
+import { render } from "react-dom";
+import SlidingPane from "react-sliding-pane";
+import "react-sliding-pane/dist/react-sliding-pane.css";
 
 
 // Solana runtime
@@ -40,7 +43,17 @@ const TEST_GIFS = [
 ]
 
 
+function isValidHttpUrl(string) {
+    let url;
 
+    try {
+        url = new URL(string);
+    } catch (_) {
+        return false;
+    }
+
+    return url.protocol === "http:" || url.protocol === "https:";
+}
 
 const App = () => {
 
@@ -109,7 +122,7 @@ const App = () => {
     }
 
   const sendGif = async () => {
-      if (inputValue.length > 0) {
+      if (inputValue.length > 0 && isValidHttpUrl(inputValue)) {
           console.log('gif link:', inputValue);
           try {
               const provider = getProvider();
@@ -146,6 +159,11 @@ const App = () => {
       </button>
   );
 
+    const [state, setState] = useState({
+        isPaneOpen: false,
+        isPaneOpenLeft: false,
+    });
+
     const renderConnectedContainer = () => {
         // The program account hasn't be initialized.
         if (gifList === null) {
@@ -173,15 +191,28 @@ const App = () => {
                     <div className="gif-grid">
                         {/* We use index as the key instead, also, the src is now item.gifLink */}
                         {gifList.map((item, index) => (
-
                             <div className="gif-item" key={index}>
-
                                 <img src={item.gifLink} alt={"COOL GIF!"}/>
-                                <p>Hi! This is owned by ?</p>
+                                <button onClick={() => setState({ isPaneOpen: true })}>
+                                    Click me to open right pane!
+                                </button>
+                                <SlidingPane
+                                    className="gif-item"
+                                    isOpen={state.isPaneOpen}
+                                    title="Nice GIF"
+                                    onRequestClose={() => {
+                                        // triggered on "<" on left top click or on outside click
+                                        setState({ isPaneOpen: false });
+                                    }}
+                                >   <div className="gif-slideout">
+                                <p>HI! {item.userAddress.toString()}</p></div>
+                                </SlidingPane>
                             </div>
 
                         ))}
                     </div>
+
+
                 </div>
             )
         }
