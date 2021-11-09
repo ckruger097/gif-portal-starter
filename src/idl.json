@@ -30,6 +30,11 @@
           "name": "baseAccount",
           "isMut": true,
           "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
         }
       ],
       "args": [
@@ -81,6 +86,6 @@
     }
   ],
   "metadata": {
-    "address": "FJL1YuhRJndaxKP6t1AkxtLRdQNMznzbokdoZuUZj66S"
+    "address": "CmAshzddyvVfDXqu9pyQUbyghHFandmjejKV2nszcPAx"
   }
 }

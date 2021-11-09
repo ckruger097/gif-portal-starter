@@ -115,6 +115,7 @@ const App = () => {
               await program.rpc.addGif(inputValue, {
                   accounts: {
                       baseAccount: baseAccount.publicKey,
+                      user: provider.wallet.publicKey,
                   },
               });
               console.log("GIF transmission is a go! - ", inputValue)
